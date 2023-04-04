@@ -1,7 +1,7 @@
-const main = document.querySelector('main');
+const main =  document.querySelector('main');
 const voicesSelect = document.getElementById('voices');
 const textarea = document.getElementById('text');
-const readBtn = document.getElementById('read');
+const readBtn = document.getElementById('read')
 const toggleBtn = document.getElementById('toggle');
 const closeBtn = document.getElementById('close');
 
@@ -58,11 +58,11 @@ const data = [
 
 data.forEach(createBox);
 
-// Create speech boxes
-function createBox(item) {
-  const box = document.createElement('div');
+//create speech box
+function createBox (item) {
+  const box =  document.createElement('div');
 
-  const { image, text } = item;
+  const { image, text } =  item;
 
   box.classList.add('box');
 
@@ -71,72 +71,168 @@ function createBox(item) {
     <p class="info">${text}</p>
   `;
 
+  
+
   box.addEventListener('click', () => {
     setTextMessage(text);
-    speakText();
+    speakText()
 
-    // Add active effect
+    //Add effect 
     box.classList.add('active');
-    setTimeout(() => box.classList.remove('active'), 800);
-  });
+    setTimeout(() => box.classList.remove('active'), 800)
+  })
 
-  main.appendChild(box);
+  main.appendChild(box)
+
 }
 
-// Init speech synth
+//init speechSynthesis
+
 const message = new SpeechSynthesisUtterance();
 
-// Store voices
+//store voices
 let voices = [];
 
-function getVoices() {
-  voices = speechSynthesis.getVoices();
+function getVoices ()  {
+  voices = speechSynthesis.getVoices()
 
   voices.forEach(voice => {
     const option = document.createElement('option');
 
-    option.value = voice.name;
-    option.innerText = `${voice.name} ${voice.lang}`;
+    option.value = voice.name
+    option.innerHTML =  `${voice.name} ${voice.lang}`;
 
     voicesSelect.appendChild(option);
-  });
+  })
 }
 
-// Set text
-function setTextMessage(text) {
+//Set text
+function setTextMessage (text) {
   message.text = text;
+
 }
 
-// Speak text
-function speakText() {
-  speechSynthesis.speak(message);
+//speck text
+function speakText () {
+  speechSynthesis.speak(message)
 }
 
-// Set voice
-function setVoice(e) {
+//set voice 
+function setVoice (e) {
   message.voice = voices.find(voice => voice.name === e.target.value);
 }
 
-// Voices changed
-speechSynthesis.addEventListener('voiceschanged', getVoices);
+//voice change
+speechSynthesis.addEventListener('voiceschanged', getVoices)
 
-// Toggle text box
-toggleBtn.addEventListener('click', () =>
+//Toggle Text box
+toggleBtn.addEventListener('click', () => {
   document.getElementById('text-box').classList.toggle('show')
-);
-
-// Close button
-closeBtn.addEventListener('click', () =>
+})
+//close btn
+closeBtn.addEventListener('click', () => {
   document.getElementById('text-box').classList.remove('show')
-);
+})
 
-// Change voice
-voicesSelect.addEventListener('change', setVoice);
 
-// Read text button
+//voice lang change
+voicesSelect.addEventListener('change', setVoice)
+
+//read text btn
 readBtn.addEventListener('click', () => {
   setTextMessage(textarea.value);
-  speakText();
-});
+  speakText()
+})
 
 getVoices();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function createBox(item) {
+
+
+//   box.addEventListener('click', () => {
+//     setTextMessage(text);
+//     speakText();
+
+//     // Add active effect
+//     box.classList.add('active');
+//     setTimeout(() => box.classList.remove('active'), 800);
+//   });
+
+//   main.appendChild(box);
+// }
+
+// // Init speech synth
+// const message = new SpeechSynthesisUtterance();
+
+// // Store voices
+// let voices = [];
+
+// function getVoices() {
+//   voices = speechSynthesis.getVoices();
+
+//   voices.forEach(voice => {
+//     const option = document.createElement('option');
+
+//     option.value = voice.name;
+//     option.innerText = `${voice.name} ${voice.lang}`;
+
+//     voicesSelect.appendChild(option);
+//   });
+// }
+
+// // Set text
+// function setTextMessage(text) {
+//   message.text = text;
+// }
+
+// // Speak text
+// function speakText() {
+//   speechSynthesis.speak(message);
+// }
+
+// // Set voice
+// function setVoice(e) {
+//   message.voice = voices.find(voice => voice.name === e.target.value);
+// }
+
+// // Voices changed
+// speechSynthesis.addEventListener('voiceschanged', getVoices);
+
+// // Toggle text box
+// toggleBtn.addEventListener('click', () =>
+//   document.getElementById('text-box').classList.toggle('show')
+// );
+
+// // Close button
+// closeBtn.addEventListener('click', () =>
+//   document.getElementById('text-box').classList.remove('show')
+// );
+
+// // Change voice
+// voicesSelect.addEventListener('change', setVoice);
+
+// // Read text button
+// readBtn.addEventListener('click', () => {
+//   setTextMessage(textarea.value);
+//   speakText();
+// });
+
+// getVoices();
